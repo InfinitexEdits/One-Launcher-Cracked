@@ -1,0 +1,13 @@
+name: build
+on: workflow_dispatch
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo build --release -p oneclient_app
+      - uses: actions/upload-artifact@v4
+        with:
+          name: oneclient-windows
+          path: target/release/oneclient_app.exe
